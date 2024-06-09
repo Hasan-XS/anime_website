@@ -1,5 +1,6 @@
 config/
 .venv
+anime/migrations/
 
 
 # Byte-compiled / optimized / DLL files
