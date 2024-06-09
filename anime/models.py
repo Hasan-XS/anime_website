@@ -6,4 +6,4 @@ from django.db import models
 class ArticleAnime(models.Model):
     title = models.CharField(max_length=100)
     text = models.TextField()
-    time = models.IntegerChoices()
+    time = models.IntegerField(default=5)
