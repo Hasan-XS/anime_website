@@ -1,0 +1,105 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<!-- Page Preloder -->
+<!-- <div id="preloder">
+            <div class="loader"></div>
+        </div>
+     -->
+<!-- Header Section Begin -->
+<header class="header">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-2">
+                <div class="header__logo">
+                    <a href="./index.html">
+                        <img src="{%static 'img/logo.png'%}" alt="lo">
+                    </a>
+                </div>
+            </div>
+            <div class="col-lg-8">
+                <div class="header__nav">
+                    <nav class="header__menu mobile-menu">
+                        <ul>
+                            <li><a href="{% url 'animes'%}">صفحه اصلی</a></li>
+                            <li class="active"><a href="./categories.html">دسته بندی <span class="arrow_carrot-down"></span></a>
+                                <ul class="dropdown">
+                                    <!-- <li><a href="./categories.html">دسته بندی</a></li> -->
+                                    <li><a href="{% url 'anime_news'%}">اخبار انیمه ها</a></li>
+                                    <li><a href="./anime-watching.html">تماشای انیمه</a></li>
+                                    <li><a href="{% url 'anime_article'%}">مقاله ها</a></li>
+                                </ul>
+                            </li>
+                            {% if user.is_authenticated %}
+                            <li>Hi {{user}}</li>
+                            <li>
+                                <form class="nav-item" action="{% url 'logout' %}" method="post">
+                                    {% csrf_token %}
+                                    <button class="nav-link" type="submit">Logout</button>
+                                </form>
+                            </li>
+                            {% else %}
+                            <li><a href="{% url 'register'%}">ثبت نام</a></li>
+                            <li><a href="{% url 'login' %}">ورود</a></li>
+                            {% endif %}
+                            <li><a href="{% url 'anime_blogs'%}">بلاگ ها</a></li>
+                            <li><a href="#">تماس با انیمه ایران</a></li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+            <div class="col-lg-2">
+                <div class="header__right">
+                    <a href="#" class="search-switch"><span class="icon_search"></span></a>
+                    {% if user.is_authenticated %}
+                    <a href="./login.html"><span class="icon_profile"></span></a>
+                    {% else %}
+
+                    {% endif %}
+
+                </div>
+            </div>
+        </div>
+        <div id="mobile-menu-wrap"></div>
+    </div>
+</header>
+<!-- Header End -->
+
+<!-- Normal Breadcrumb Begin -->
+<section class="normal-breadcrumb set-bg" data-setbg="{%static 'img/normal-breadcrumb.jpg'%}">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <div class="normal__breadcrumb__text">
+                    <h2>مقاله های انیمه ای</h2>
+                    <p>.به دنیای بلاگ های انیمه خوش آمدید</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Normal Breadcrumb End -->
+
+<!-- Blog Section Begin -->
+<section class="blog spad">
+    <div class="container">
+        <div class="row">
+            {% for animearticle in animearticles %}
+            <div class="col-lg-3">
+                <div class="blog__item small__item set-bg" data-setbg="{%static 'img/blog/blog-11.jpg'%}">
+                    <div class="blog__item__text">
+                        <p><span class="icon_calendar"></span> 01 March 2020</p>
+                        <h4><a href="{{animearticle.get_absolute_url}}">{{animearticle.title}}</a></h4>
+                    </div>
+                </div>
+            </div>
+
+            {% endfor %}
+
+
+        </div>
+    </div>
+</section>
+<!-- Blog Section End -->
+
+{% endblock %}
